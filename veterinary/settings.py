@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'vets',
     'rest_framework',
+    'bootstrap4',
     'corsheaders',
 ]
 APPEND_SLASH = False

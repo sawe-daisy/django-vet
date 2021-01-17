@@ -10,8 +10,20 @@ from django.http import Http404
 from rest_framework.views import APIView
 import json
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from itertools import chain
+from django.urls import reverse
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
 # Create your views here.
+# class 
+
 
 def welcome(request):
     return render(request, 'index.html')
