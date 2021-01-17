@@ -20,17 +20,17 @@ COUNTY=(
 )
 
 class Veterinary(models.Model):
-    name= models.CharField(max_length=20)
+    name= models.CharField(max_length=50)
     email=models.EmailField()
-    county=models.CharField(choices=COUNTY,max_length=20)
+    county=models.CharField(choices=COUNTY,max_length=50)
     idNumber=models.IntegerField()
     phoneNumber=models.IntegerField()
 
     def __str__(self):
         return self.name
     
-    def save(self):
-        return self.save()
+    # def save(self):
+    #     return self.save()
     
-    def delete(self):
-        return self.delete()
+    # def delete(self):
+    #     return self.delete()

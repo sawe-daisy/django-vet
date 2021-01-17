@@ -37,17 +37,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'vets'
+    'vets',
+    'rest_framework',
+    'corsheaders',
 ]
+APPEND_SLASH = False
+CORS_ALLOW_ALL_ORIGINS = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'veterinary.urls'
@@ -69,6 +76,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'veterinary.wsgi.application'
+
+REST_FRAMEWORK = {
+ 
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+   
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+    
+  
+}
 
 
 # Database
