@@ -2,11 +2,12 @@ from django.shortcuts import render
 from urllib import request
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework import generics
-from .serializer import VetSerializer
+from rest_framework import generics, viewsets
+from .serializer import VetSerializer, UserSerializer
 from .models import Veterinary
 from rest_framework.decorators import permission_classes
 from django.http import Http404
+from django.contrib.auth.models import User
 from rest_framework.views import APIView
 import json
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -27,6 +28,20 @@ from django.views.generic import (
 
 def welcome(request):
     return render(request, 'index.html')
+
+class UserViewSet(viewsets.ModelViewSet):
+    # def get(self, request, format=None):
+    serializer_class=UserSerializer
+    queryset=User.objects.all()
+        # serializer=UserSerializer(queryset, many=True)
+        # return Response(serializer.data)
+    
+    # def post(self, request, format=None):
+    #     serializer=UserSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class VeterinaryViewSet(APIView):
