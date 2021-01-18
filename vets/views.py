@@ -9,6 +9,7 @@ from rest_framework.decorators import permission_classes
 from django.http import Http404
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
+from .forms import RegistrationForm, vetForm
 import json
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.shortcuts import render, redirect, get_object_or_404
@@ -77,4 +78,33 @@ class VeterinaryUpdateViewSet(APIView):
         Veterinary.delete(vet)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+def register(request):
+    if request.method=="POST":
+        form=RegistrationForm(request.POST)
+        if form.is_valid():
+            username=form.cleaned_data.get('username')
+            form.save()
+            messages.success(request, f'Successfully created Account!.You can now login as {username}!')
+        return redirect('login')
+    else:
+        form= RegistrationForm()
+    context={
+        'form':form,
+    }
+    return render(request, 'register.html', context)
 
+
+def postOfficer(request):
+    if request.method=="POST":
+        form= vetForm(request.POST)
+        if form.is_valid():
+            name=form.cleaned_data.get('name')
+            form.save()
+            messages.success(request, f'Successfully added {name}')
+        return redirect('welcome')
+    else:
+        form= vetForm()
+    context={
+        'form':form,
+    }
+    return render(request, 'posts/vetform.html', context)
