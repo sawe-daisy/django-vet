@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from urllib import request
+from django.urls import reverse_lazy
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework import generics, viewsets
@@ -113,3 +114,13 @@ class PostListView(ListView):
     model = Veterinary
     template_name = 'index.html'
     context_object_name = 'posts'
+
+class updateOfficerView(UpdateView):
+    model= Veterinary
+    template_name='posts/vetformupdate.html'
+    fields='__all__'
+
+class DeleteOfficerView(DeleteView):
+    model= Veterinary
+    template_name='posts/vetdeactivate.html'
+    success_url=reverse_lazy('welcome')

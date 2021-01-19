@@ -5,7 +5,7 @@ from django.urls import path, include, re_path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import VeterinaryViewSet, VeterinaryUpdateViewSet, UserViewSet, register, postOfficer, PostListView
+from .views import VeterinaryViewSet, VeterinaryUpdateViewSet, UserViewSet,register, postOfficer, PostListView,updateOfficerView, DeleteOfficerView
 
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 from rest_framework_simplejwt.views import (
@@ -26,6 +26,8 @@ from rest_framework_simplejwt.views import (
 urlpatterns=[
     path('', PostListView.as_view(), name='welcome'),
     path('register/',register , name='register'),
+    path('update/<int:pk>/',updateOfficerView.as_view() , name='update'),
+    path('delete/<int:pk>/',DeleteOfficerView.as_view() , name='delete'),
     path('post/new/', postOfficer, name='post-create'),
     path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/logout/', TokenRefreshView.as_view(), name='token_refresh'),

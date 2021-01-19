@@ -1,18 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
     <h5>Welcome</h5>
-    {% for post in posts %}
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-              <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
+    <div class="container">
+      <div class="flex" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;">
+        {% for post in posts %}
+        <div class="col-md-4">
+            <div class="media-body">
+              <h2><a class="article-title" style="color: black; font-size: 20px;" ><strong>Name : </strong>{{post.name}}</a></h2>
+              <p class="article-content"style="color: black; font-size: 20px;"><strong>Email : </strong><em>{{ post.email}}</em></p>
+              <p class="article-content"style="color: black; font-size: 20px;"><strong>County : </strong><em>{{ post.county}}</em></p>
+              <p class="article-content"style="color: black; font-size: 20px;"><strong>phone Number : </strong>{{ post.phoneNumber}}</p>
+              <p class="article-content"style="color: black; font-size: 20px;"><strong>ID Number : </strong>{{post.idNumber}}</p>
             </div>
-            <h2><a class="article-title" >{{post.name}}</a></h2>
-            <p class="article-content">{{ post.email}}</p>
-            <p class="article-content">{{ post.county}}</p>
-            <p class="article-content">{{ post.phoneNumber}}</p>
-            <p class="article-content">{{ post.idNumber}}</p>
-          </div>
-        </article>
-    {% endfor %}
+            <button class="btn-xs btn-outline-info"><a class="nav-item nav-link" href="{% url 'update' post.pk %}">Update</a></button>
+            <button class="btn-xs btn-outline-danger" ><a class="nav-item nav-link" href="{% url 'delete' post.pk %}">Deactivate</a></button>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
 {% endblock content %}
