@@ -27,8 +27,8 @@ from django.views.generic import (
 # class 
 
 
-def welcome(request):
-    return render(request, 'index.html')
+# def welcome(request):
+#     return render(request, 'index.html')
 
 class UserViewSet(viewsets.ModelViewSet):
     # def get(self, request, format=None):
@@ -108,3 +108,8 @@ def postOfficer(request):
         'form':form,
     }
     return render(request, 'posts/vetform.html', context)
+
+class PostListView(ListView):
+    model = Veterinary
+    template_name = 'index.html'
+    context_object_name = 'posts'
