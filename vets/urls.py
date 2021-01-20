@@ -24,6 +24,7 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns=[
+    
     path('', PostListView.as_view(), name='welcome'),
     path('register/',register , name='register'),
     path('update/<int:pk>/',updateOfficerView.as_view() , name='update'),
