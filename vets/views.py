@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework import generics, viewsets
 from .serializer import VetSerializer, UserSerializer
+from django.template import loader 
 from .models import Veterinary
 from rest_framework.decorators import permission_classes
 from django.http import Http404
@@ -47,14 +48,14 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class VeterinaryViewSet(APIView):
-    # permission_classes=[IsAdminUser]
+    permission_classes=[IsAuthenticated]
     def get(self, request, format=None):
         vets=Veterinary.objects.all()
         serializer=VetSerializer(vets, many=True)
         return Response(serializer.data)
 
 class VeterinaryUpdateViewSet(APIView):
-    # permission_classes=[IsAdminUser]
+    permission_classes=[IsAuthenticated]
     def get_object(pk):
         try:
             return Veterinary.objects.get(pk=pk)
@@ -92,6 +93,7 @@ def register(request):
     context={
         'form':form,
     }
+    # return loader.render_to_string(request, 'register.html', 'index.html', context)
     return render(request, 'register.html', context)
 
 
@@ -114,6 +116,7 @@ class PostListView(ListView):
     model = Veterinary
     template_name = 'index.html'
     context_object_name = 'posts'
+
 
 class updateOfficerView(UpdateView):
     model= Veterinary

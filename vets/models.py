@@ -22,10 +22,10 @@ COUNTY=(
 
 class Veterinary(models.Model):
     name= models.CharField(max_length=50)
-    email=models.EmailField()
+    email=models.EmailField(unique=True)
     county=models.CharField(choices=COUNTY,max_length=50)
-    idNumber=models.IntegerField()
-    phoneNumber=models.IntegerField()
+    idNumber=models.IntegerField(unique=True)
+    phoneNumber=models.IntegerField(unique=True)
 
     def __str__(self):
         return self.name

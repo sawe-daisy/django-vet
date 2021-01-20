@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
+{% if user.is_authenticated %}
     <h5 style="font-size: 30px; margin-bottom: 20px; color: brown; text-align: center; font-weight: bold;">VETERINARY OFFICERS</h5>
     <div class="container">
       <div class="flex" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;">
@@ -18,4 +20,24 @@
         {% endfor %}
       </div>
     </div>
+    {% else %}
+    <div class="container" >
+      <h5 style="font-size: 30px; margin-bottom: 20px; color: brown; text-align: center; font-weight: bold;">VETERINARY OFFICERS WEBSITE</h5>
+      <div class="row" style="justify-content: center;">
+        <div class="border-top pt-3">
+          <div class="text-bold">
+              Register with us today 
+          </div>
+          <button class="btn btn-outline-info"><a class="ml-2" href="{% url 'register' %}">Sign Up</a></button>
+      </div>
+    </div>
+      <div class="row" style="justify-content: center;">
+        <div class="border-top pt-3">
+          <div class="text-muted">
+              Already Have Account 
+          </div>
+          <button class="btn btn-outline-success"><a class="ml-2" href="{% url 'login' %}">Sign In</a></button>
+      </div>
+    </div>
+    {% endif %}
 {% endblock content %}
